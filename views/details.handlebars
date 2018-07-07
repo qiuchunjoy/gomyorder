@@ -1,0 +1,10 @@
+<ul class="list-group">
+  <h1>[{{user.name}}]</h1>
+  <li class="list-group-item"><strong>Name:</strong>{{user.name}}</li>
+  <li class="list-group-item"><strong>Takeout_name:</strong>{{user.takeout_name}}</li>
+  <li class="list-group-item"><strong>money:</strong>{{user.money}}</li>
+</ul>
+<a class="btn btn-default pull-left"  href="/">Back</a>
+<form method="POST" action="/user/delete/{{user.name}}?_method=DELETE">
+  <input type="submit" class="btn btn-danger pull-right" value="Delete">
+</form>

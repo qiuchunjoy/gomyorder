@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Document</title>
+  <!-- <form class="form-inline" method="POST" action="/user/show">
+    <input type="submit" class="btn btn-primary" value="Search">
+  </form> -->
+  <script>
+    $(function(){
+      let jsonArray = {"takeout_name": ["b1", "b3", "GG", "b2"], "name": ["channing", "ranky", "pugi", "winsen"], "money": ["100", "100", "100", "100"]}
+      let tableLenth = 0
+      // 加入josn資料
+      let showTd = ''
+      // 組裝html格式
+      $("#showBtn").click(function(){
+        let totalMoney = 0
+        showTd = ''
+        // $('#jsonData').removeNode(true);
+        if (tableLenth) {
+          for (var i = 0; i <= tableLenth; i++) {
+            document.getElementById("jsonData").deleteRow(0);
+          }
+        }
+        $.ajax({
+          method: "POST",
+          url: "/user/show",
+          success: function (data) {
+              tableLenth = 0;
+              jsonArray = JSON.parse(data);
+              for (let i = 0; i < jsonArray.takeout_name.length; i++) {
+                showTd += '<tr><td>'+jsonArray.takeout_name[i]+'</td>'
+                showTd += '<td>'+jsonArray.name[i]+'</td>'
+                showTd += '<td>'+jsonArray.money[i]+'</td></tr>'
+                totalMoney += parseInt(jsonArray.money[i])
+                tableLenth += 1;
+              }
+              showTd += '<tr><td></td><td>totalMoney</td><td>' + totalMoney + '</td>'
+              // 加入table標籤內
+              $('#jsonData').append(showTd);
+          },
+          error: function (error) {
+              /*错误信息处理*/
+              console.log('error', error);
+          }
+      })
+    });
+  });
+  </script>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>takeout_name</th>
+        <th>name</th>
+        <th>money</th>
+      </tr>
+    </thead>
+    <tbody id='jsonData'></tbody>
+  </table>
+  <input id="showBtn" type="button" name="" value="show">
+</body>
+<style>
+  table {
+    border-width:5px;
+    border-style:inset;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid black;
+    width: 50%;
+  }
+</style>
+</html>

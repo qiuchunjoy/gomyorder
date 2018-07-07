@@ -1,0 +1,20 @@
+{
+  "name": "ordertakeout",
+  "version": "1.0.0",
+  "description": "Simple management takeout orders",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Channing cheung",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.10",
+    "redis": "^2.8.0",
+    "step": "^1.0.0"
+  }
+}
