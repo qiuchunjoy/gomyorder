@@ -34,11 +34,12 @@
               for (let i = 0; i < jsonArray.takeout_name.length; i++) {
                 showTd += '<tr><td>'+jsonArray.takeout_name[i]+'</td>'
                 showTd += '<td>'+jsonArray.name[i]+'</td>'
+                showTd += '<td>'+jsonArray.number[i]+'</td>'
                 showTd += '<td>'+jsonArray.money[i]+'</td></tr>'
                 totalMoney += parseInt(jsonArray.money[i])
                 tableLenth += 1;
               }
-              showTd += '<tr><td></td><td>totalMoney</td><td>' + totalMoney + '</td>'
+              showTd += '<tr><td></td><td></td><td>totalMoney</td><td>' + totalMoney + '</td></tr>'
               // 加入table標籤內
               $('#jsonData').append(showTd);
           },
@@ -57,6 +58,7 @@
       <tr>
         <th>takeout_name</th>
         <th>name</th>
+        <th>number</th>
         <th>money</th>
       </tr>
     </thead>

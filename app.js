@@ -71,11 +71,14 @@ app.get('/user/add',function(req,res,next){
 app.post('/user/add',function(req,res,next){
   let name=req.body.name;
   let takeout_name=req.body.takeout_name;
+  let number=req.body.number;
   let money=req.body.money;
+
 
   client.hmset(name, [
     'takeout_name',takeout_name,
-    'money',money
+    'money',money,
+    'number',number
   ],function(err,reply){
     if(err){
       console.log(err);
@@ -96,6 +99,7 @@ app.get('/user/show',function(req,res,next){
 app.post('/user/show',function(req,res,next){
   let name_list=[];
   let takeout_list=[];
+  let number_list=[];
   let money_list=[];
   let jsonData = {};
     console.log('req', req)
@@ -111,9 +115,21 @@ app.post('/user/show',function(req,res,next){
       client.hget(res[key], 'money',function(err, money){
         money_list.push('"'+money.toString()+'"');
       });
+      client.hget(res[key], 'number',function(err, number){
+        number_list.push('"'+number.toString()+'"');
+      });
     };
     setTimeout(function(){
-      jsonData='{"'+"takeout_name"+'":['+takeout_list+'],"'+"name"+'":['+name_list+'],"'+"money"+'":['+money_list+']}';
+      // jsonData='{"'+"takeout_name"+'":['+takeout_list+'],"'+"name"+'":['+name_list+'],"'+"money"+'":['+money_list+']}';
+      jsonData='{"'
+      +"takeout_name"+
+      '":['+takeout_list+'],"'
+      +"name"+
+      '":['+name_list+'],"'
+      +"number"+
+      '":['+number_list+'],"'
+      +"money"+
+      '":['+money_list+']}';
       // console.log('hello');
     },10);
   });
